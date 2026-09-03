@@ -64,70 +64,72 @@ function buildRecommendations(d: Record<string, unknown>, score: number): string
   const recs: string[] = [];
 
   if (s < 5)
-    recs.push(`🚨 CRITICAL — Only ${s}h sleep. Under 5h severely damages mood & cognition. Set a fixed bedtime tonight and target 7+ hours within one week.`);
+    recs.push(strip(`CRITICAL — Only ${s}h sleep. Under 5h severely damages mood & cognition. Set a fixed bedtime tonight and target 7+ hours within one week.`));
   else if (s < 6.5)
-    recs.push(`😴 Sleep deficit: ${s}h vs recommended 7–9h. Even 1 extra hour lifts your score. Try no caffeine after 2 PM and a 10-min wind-down routine.`);
+    recs.push(strip(`Sleep deficit: ${s}h vs recommended 7-9h. Even 1 extra hour lifts your score. Try no caffeine after 2 PM and a 10-min wind-down routine.`));
 
   if (u > s)
-    recs.push(`📱 You spend more time on social media (${u}h) than sleeping (${s}h). Flip this — sleep must win.`);
+    recs.push(strip(`You spend more time on social media (${u}h) than sleeping (${s}h). Flip this — sleep must win.`));
 
   if (u > 6)
-    recs.push(`📵 ${u}h daily social media is very high. Cap it at 2–3h using Screen Time or Digital Wellbeing. Each hour reduced above 4h improves score by ~0.4.`);
+    recs.push(strip(`${u}h daily social media is very high. Cap it at 2-3h using Screen Time or Digital Wellbeing. Each hour reduced above 4h improves score by ~0.4.`));
   else if (u > 4)
-    recs.push(`⏱️ ${u}h usage is above healthy threshold (3h). Try phone-free meals and no social media after 9 PM.`);
+    recs.push(strip(`${u}h usage is above healthy threshold (3h). Try phone-free meals and no social media after 9 PM.`));
 
   if (a < 0.5)
-    recs.push(`🏃 Almost no physical activity (${a}h). 30 min brisk walk daily reduces cortisol by ~26% and improves sleep. Start tomorrow morning.`);
+    recs.push(strip(`Almost no physical activity (${a}h). 30 min brisk walk daily reduces cortisol by ~26% and improves sleep. Start tomorrow morning.`));
   else if (a < 1.0)
-    recs.push(`💪 Increase from ${a}h to 1.5h daily. A 20-min evening walk or home workout works well.`);
+    recs.push(strip(`Increase from ${a}h to 1.5h daily. A 20-min evening walk or home workout works well.`));
 
   if (["High", "Very High"].includes(stress))
-    recs.push(`🧘 Stress level '${stress}' is amplifying every other negative factor. Practice 4-7-8 breathing daily and consider weekly counselling.`);
+    recs.push(strip(`Stress level '${stress}' is amplifying every other negative factor. Practice 4-7-8 breathing daily and consider weekly counselling.`));
 
   if (un > 80)
-    recs.push(`🔔 ${un} unlocks/day = checking phone every ~${Math.round((16 * 60) / Math.max(un, 1))} minutes. Turn off non-essential notifications and use app timers.`);
+    recs.push(strip(`${un} unlocks/day means checking phone every ~${Math.round((16 * 60) / Math.max(un, 1))} minutes. Turn off non-essential notifications and use app timers.`));
   else if (un > 50)
-    recs.push(`📲 ${un} daily unlocks fragments concentration. Enable 'Do Not Disturb' during study blocks.`);
+    recs.push(strip(`${un} daily unlocks fragments concentration. Enable Do Not Disturb during study blocks.`));
 
   if (st < 2)
-    recs.push(`📚 Only ${st}h study/day. Use Pomodoro (25 min focus + 5 min break) to rebuild academic routine without burnout.`);
+    recs.push(strip(`Only ${st}h study/day. Use Pomodoro (25 min focus + 5 min break) to rebuild academic routine without burnout.`));
 
   if (mood < 4)
-    recs.push(`😔 Mood is low (${mood}/10). Try: 15 min morning sunlight, write 3 gratitudes, talk to a friend today.`);
+    recs.push(strip(`Mood is low (${mood}/10). Try: 15 min morning sunlight, write 3 gratitudes, talk to a friend today.`));
   else if (mood < 6)
-    recs.push(`😐 Mood at ${mood}/10 — moderate. Regular exercise and consistent sleep will naturally lift this within 2 weeks.`);
+    recs.push(strip(`Mood at ${mood}/10 — moderate. Regular exercise and consistent sleep will naturally lift this within 2 weeks.`));
 
   if (sup < 2.5)
-    recs.push(`🤝 Low social support (${sup}/5) is a significant risk factor. Reach out to one friend or family member today. Consider joining a campus club.`);
+    recs.push(strip(`Low social support (${sup}/5) is a significant risk factor. Reach out to one friend or family member today. Consider joining a campus club.`));
   else if (sup < 3.5)
-    recs.push(`👥 Moderate social support (${sup}/5). Deepen 1–2 close relationships — quality over quantity matters most.`);
+    recs.push(strip(`Moderate social support (${sup}/5). Deepen 1-2 close relationships — quality over quantity matters most.`));
 
   if (scrn > 2)
-    recs.push(`🌙 ${scrn}h screen use before bed disrupts melatonin. Switch to a book, podcast, or light stretching in the last hour before sleep.`);
+    recs.push(strip(`${scrn}h screen use before bed disrupts melatonin. Switch to a book, podcast, or light stretching in the last hour before sleep.`));
   else if (scrn > 1)
-    recs.push(`📺 Reduce pre-bed screen time from ${scrn}h to under 30 minutes. Blue-light glasses or night mode help if unavoidable.`);
+    recs.push(strip(`Reduce pre-bed screen time from ${scrn}h to under 30 minutes. Blue-light glasses or night mode help if unavoidable.`));
 
   if (diet < 2.5)
-    recs.push(`🥗 Poor diet (${diet}/5) impacts energy, focus, and mood. Add vegetables, reduce processed food, eat 3 regular meals daily.`);
+    recs.push(strip(`Poor diet (${diet}/5) impacts energy, focus, and mood. Add vegetables, reduce processed food, eat 3 regular meals daily.`));
   else if (diet < 3.5)
-    recs.push(`🍎 Average diet (${diet}/5). Add one fruit/veg serving per meal and reduce sugary drinks.`);
+    recs.push(strip(`Average diet (${diet}/5). Add one fruit/veg serving per meal and reduce sugary drinks.`));
 
   if (purpose === "Entertainment" && u > 3)
-    recs.push(`🎭 Heavy entertainment-based usage (${u}h/day) drives comparison anxiety. Replace 1 hour with a creative hobby.`);
+    recs.push(strip(`Heavy entertainment-based usage (${u}h/day) drives comparison anxiety. Replace 1 hour with a creative hobby.`));
 
   if (score >= 7.5)
-    recs.push("✅ Excellent score! Maintain your routine, do a weekly digital detox, and support peers who may be struggling.");
+    recs.push("Excellent score! Maintain your routine, do a weekly digital detox, and support peers who may be struggling.");
   else if (score >= 6.0)
-    recs.push("👍 Good score. Addressing the 2–3 specific issues above will push you toward excellent within weeks.");
+    recs.push("Good score. Addressing the 2-3 specific issues above will push you toward excellent within weeks.");
   else if (score >= 5.0)
-    recs.push("⚠️ Moderate concerns. Pick the top issue above and fix it this week. Small wins compound fast.");
+    recs.push("Moderate concerns. Pick the top issue above and fix it this week. Small wins compound fast.");
   else
-    recs.push("🆘 Significant strain detected. Please reach out today — iCall: 9152987821 | AASRA: 9820466627 | Vandrevala Foundation: 1860-2662-345 (24/7).");
+    recs.push("Significant strain detected. Please reach out today — iCall: 9152987821 | AASRA: 9820466627 | Vandrevala Foundation: 1860-2662-345 (24/7).");
 
   return recs;
 }
 
-// ── Route handler ─────────────────────────────────────────────────────────────
+// Strip emojis — browsers/fonts on some systems can't render them cleanly
+const strip = (s: string) =>
+  s.replace(/[\u{1F000}-\u{1FFFF}\u{2600}-\u{27BF}\u{FE00}-\u{FEFF}]/gu, "").replace(/^\s+/, "").trim();
 export async function POST(req: NextRequest) {
   try {
     const data = await req.json();
