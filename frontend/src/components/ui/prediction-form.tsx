@@ -53,13 +53,13 @@ const statusColors: Record<string, { bg: string; text: string; ring: string }> =
 export function PredictionForm() {
   const [form, setForm] = useState<FormData>({
     name: "", email: "", phone: "",
-    age: "18", gender: "Male", country: "India",
-    academic_level: "Undergraduate", platform: "Instagram",
-    purpose: "Entertainment", usage_hours: "3", daily_unlocks: "20",
-    study_hours: "4", activity_hours: "1", sleep_hours: "7",
-    stress_level: "Medium",
-    mood_score: "6", social_support: "3",
-    screen_before_bed: "1", diet_quality: "3",
+    age: "", gender: "", country: "",
+    academic_level: "", platform: "",
+    purpose: "", usage_hours: "", daily_unlocks: "",
+    study_hours: "", activity_hours: "", sleep_hours: "",
+    stress_level: "",
+    mood_score: "5", social_support: "3",
+    screen_before_bed: "0", diet_quality: "3",
   });
 
   const [result, setResult] = useState<PredictionResult | null>(null);
@@ -134,11 +134,11 @@ export function PredictionForm() {
             </h3>
             <Field label="Age" name="age" type="number" min={10} max={35} value={form.age} onChange={handleChange} />
             <Select label="Gender" name="gender" value={form.gender} onChange={handleChange}
-              options={["Male", "Female"]} />
+              options={["", "Male", "Female"]} />
             <Select label="Country" name="country" value={form.country} onChange={handleChange}
-              options={["USA", "Canada", "UK", "India", "China", "Other"]} />
+              options={["", "USA", "Canada", "UK", "India", "China", "Other"]} />
             <Select label="Academic Level" name="academic_level" value={form.academic_level} onChange={handleChange}
-              options={["High School", "Undergraduate", "Graduate"]} />
+              options={["", "High School", "Undergraduate", "Graduate"]} />
           </div>
 
           {/* Social Media */}
@@ -147,9 +147,9 @@ export function PredictionForm() {
               <Smartphone className="w-5 h-5 text-amber-500" /> Social Media Usage
             </h3>
             <Select label="Most Used Platform" name="platform" value={form.platform} onChange={handleChange}
-              options={["Facebook", "Instagram", "Twitter", "LinkedIn", "Snapchat", "TikTok", "YouTube", "WeChat"]} />
+              options={["", "Facebook", "Instagram", "Twitter", "LinkedIn", "Snapchat", "TikTok", "YouTube", "WeChat"]} />
             <Select label="Primary Purpose" name="purpose" value={form.purpose} onChange={handleChange}
-              options={["Education", "Entertainment", "Networking"]} />
+              options={["", "Education", "Entertainment", "Networking"]} />
             <Field label="Avg. Daily Usage (hrs)" name="usage_hours" type="number" min={0} max={24} step={0.5} value={form.usage_hours} onChange={handleChange} />
             <Field label="Daily Phone Unlocks" name="daily_unlocks" type="number" min={0} max={200} value={form.daily_unlocks} onChange={handleChange} />
           </div>
@@ -163,7 +163,7 @@ export function PredictionForm() {
             <Field label="Physical Activity (hrs/day)" name="activity_hours" type="number" min={0} max={24} step={0.5} value={form.activity_hours} onChange={handleChange} />
             <Field label="Sleep Hours / Night" name="sleep_hours" type="number" min={0} max={24} step={0.5} value={form.sleep_hours} onChange={handleChange} />
             <Select label="Stress Level" name="stress_level" value={form.stress_level} onChange={handleChange}
-              options={["Low", "Medium", "High", "Very High"]} />
+              options={["", "Low", "Medium", "High", "Very High"]} />
           </div>
 
           {/* Wellbeing — 4 new inputs */}
