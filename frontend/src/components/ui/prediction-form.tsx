@@ -77,7 +77,7 @@ export function PredictionForm() {
     setResult(null);
 
     try {
-      const res = await fetch("http://localhost:5000/predict", {
+      const res = await fetch("/api/predict", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
